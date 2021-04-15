@@ -54,7 +54,16 @@ export const burger = {
   name: "Burger", 
   price: 18, 
   category: "Lunch", 
-  /*Your code here*/
+  discount: function(type) {
+    if (type === "teacher" || type === "student") {
+      return this.price * 0.75;
+    } else if (type === 'military' || type === 'senior') {
+      return this.price * 0.9;
+    } else {
+      return this.price * 0.9;
+    }
+
+  }
 }
 
 
@@ -75,7 +84,11 @@ const reviews = [
 Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
-
+for (let i = 0; i < reviews.length; i++) {
+  if (reviews[i].name === "Julius") {
+    console.log(reviews[i]);
+  }
+}
 
 
 
@@ -84,8 +97,11 @@ Using the reviews array above do the following: (no function needed)
   1. Following the same format (name, rating, feedback), add a new fictitious review object to the reviews array
   2. log the whole array to the console, make sure the new review is inside of it   
 */
-
-
+const fakeReview = {
+  name:"Godzilla", rating: 1.0, feedback: "Too small to see clearly, I almost stepped on it!",
+}
+reviews.push(fakeReview);
+console.log(reviews);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Reyna's feedback is missing! Use what you know to do the following: (no function needed) 
@@ -93,8 +109,12 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   2. log the reviews array to the console to check your work
 */
 
-
-
+for (let i=0; i < reviews.length; i++) {
+  if (reviews[i].name === "Reyna" && reviews[i].feedback === "") {
+    reviews[i].feedback = "this place is chill with really cool people, great for getting work done on weekdays";
+  }
+}
+console.log(reviews);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -108,8 +128,11 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(array, index) {
+  let record = array[index];
+  let returnString = record.name + " gave the restaurant a " + record.rating + " star review, and their feedback was: " + record.feedback;
+  
+  return returnString;
 }
 
 
@@ -127,8 +150,10 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(array) {
+  let index = array.length - 1;
+  
+  return getReviewByIndex(array, index);
 } 
 
 
@@ -149,8 +174,16 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
+ function getReviewByRating(array, rating) {
+    let returnThis = [];
+
+    array.forEach(function(element) {
+      if (element.rating === rating) {
+        returnThis.push(element);
+      }
+    });
+
+    return returnThis;
   }
 
   
@@ -167,9 +200,21 @@ Use the getLongReviews function below to do the following:
   ]
 */
 
+function countWords(inString) {
+  return inString.split(' ').length;
+}
+
 function getLongReviews(/* code here */) {
-    /* code here */
-  }
+  let returnThis = [];
+
+  array.forEach(function(element) {
+    if (countWords(element.feedback) >= 15) {
+      returnThis.push(element);
+    }
+  });
+
+  return returnThis;
+}
   
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
